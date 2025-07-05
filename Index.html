@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lukas Havenga | Senior Frontend Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --clr-bg: #f4f5f7;
+            --clr-card: rgba(255,255,255,.8);
+            --clr-border: rgba(45,125,50,.15);
+            --clr-text: #1a1a1a;
+            --clr-primary: #2d7d32;
+            --clr-accent: #00c853;
+            --clr-gradient: linear-gradient(135deg, #2d7d32, #00c853);
+            --blur: 25px;
+            --shadow-soft: 0 10px 40px rgba(45,125,50,.08);
+            --shadow-hover: 0 15px 50px rgba(45,125,50,.18);
+            --font-base: 16px;
+        }
+
+        [data-theme="dark"] {
+            --clr-bg: #0a0f0d;
+            --clr-card: rgba(26,40,32,.8);
+            --clr-border: rgba(0,200,83,.12);
+            --clr-text: #e8f5e8;
+            --clr-primary: #4caf50;
+            --clr-accent: #00e676;
+            --clr-gradient: linear-gradient(135deg, #4caf50, #00e676);
+            --shadow-soft: 0 10px 40px rgba(0,200,83,.15);
+            --shadow-hover: 0 15px 50px rgba(0,200,83,.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: var(--font-base)
+        }
+
+        body {
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.7;
+            font-weight: 400;
+            transition: all .4s ease
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            transition: .3s ease
+        }
+
+            a::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+                width: 0;
+                height: 2px;
+                background: var(--clr-gradient);
+                transition: .4s ease;
+                border-radius: 1px
+            }
+
+            a:hover::after {
+                width: 100%
+            }
+
+        section {
+            padding: 50px 0;
+            position: relative
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 35px;
+            font-weight: 700;
+            background: var(--clr-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInLeft .7s ease both;
+            letter-spacing: -0.5px
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes glow {
+            0%,100% {
+                box-shadow: var(--shadow-soft)
+            }
+
+            50% {
+                box-shadow: var(--shadow-hover)
+            }
+        }
+
+        /* ——— CONSISTENT CARD SYSTEM ——— */
+        .card {
+            background: var(--clr-card);
+            border: 1px solid var(--clr-border);
+            border-radius: 24px;
+            padding: 35px 38px;
+            transition: .4s ease;
+            backdrop-filter: blur(var(--blur));
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+            min-height: 180px; /* Ensures consistent card heights */
+        }
+
+            .card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--clr-gradient);
+                opacity: .04;
+                border-radius: 24px;
+                animation: glow 5s ease-in-out infinite;
+            }
+
+            .card:hover {
+                transform: translateY(-8px) scale(1.01);
+                box-shadow: var(--shadow-hover)
+            }
+
+        /* ——— HERO SECTION ——— */
+        .hero-card {
+            max-width: 1240px;
+            margin: 40px auto 20px;
+            animation: fadeUp .9s ease .2s both;
+            background: var(--clr-card);
+            border: 1px solid var(--clr-border);
+            border-radius: 24px;
+            padding: 35px 38px;
+            transition: .4s ease;
+            backdrop-filter: blur(var(--blur));
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+            .hero-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--clr-gradient);
+                opacity: .04;
+                border-radius: 24px;
+                animation: glow 5s ease-in-out infinite;
+            }
+
+        .hero-name {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--clr-text);
+            position: relative;
+            z-index: 2;
+            letter-spacing: -1px;
+            line-height: 1.1
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            background: var(--clr-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 12px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 35px;
+            position: relative;
+            z-index: 2
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,.5);
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 30px;
+            border: 1px solid var(--clr-border);
+            backdrop-filter: blur(15px);
+            cursor: pointer;
+            transition: .35s ease;
+            font-weight: 500
+        }
+
+            .pill:hover {
+                transform: translateY(-4px) scale(1.03);
+                box-shadow: var(--shadow-hover);
+                background: rgba(255,255,255,.7)
+            }
+
+        /* ——— IMPROVED LAYOUT & SPACING ——— */
+        .wrapper {
+            max-width: 1300px;
+            margin: auto;
+            padding: 0 30px
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 50px;
+            align-items: start
+        }
+
+        /* ——— SUMMARY CARD (CONSISTENT SIZE) ——— */
+        .summary-card {
+            grid-column: 1 / -1;
+            background: var(--clr-card);
+            border: 1px solid var(--clr-border);
+            border-radius: 24px;
+            padding: 35px 38px;
+            backdrop-filter: blur(var(--blur));
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .summary-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: var(--clr-gradient)
+            }
+
+            .summary-card p {
+                font-size: 1.1rem;
+                line-height: 1.8;
+                font-weight: 400
+            }
+
+        /* ——— CLEAN TECH LOGOS (NO BORDERS) ——— */
+        .tech-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .tech-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto;
+            transition: .3s ease;
+            border-radius: 8px;
+        }
+
+            .tech-logo:hover {
+                transform: translateY(-3px) scale(1.1);
+            }
+
+            .tech-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,.1));
+            }
+
+        /* ——— MORE INDICATOR ——— */
+        .more-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--clr-primary);
+            opacity: 0.6;
+            transition: .3s ease;
+        }
+
+            .more-indicator:hover {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+        /* ——— EXPERIENCE STYLING ——— */
+        .role {
+            margin-bottom: 45px;
+            padding: 25px 0 25px 0;
+            border-left: 4px solid transparent;
+            transition: .4s ease;
+            border-radius: 8px
+        }
+
+            .role:hover {
+                border-left-color: var(--clr-accent);
+                padding-left: 25px;
+                background: rgba(45,125,50,.02)
+            }
+
+        .company {
+            font-weight: 700;
+            color: var(--clr-text);
+            font-size: 1.3rem;
+            line-height: 1.4;
+            margin-bottom: 8px
+        }
+
+        .dates {
+            background: var(--clr-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block
+        }
+
+        .company-description {
+            background: rgba(45,125,50,.05);
+            border-left: 4px solid var(--clr-accent);
+            padding: 20px 25px;
+            margin: 15px 0;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            font-size: .95rem;
+            line-height: 1.6
+        }
+
+        .sub-role {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            padding: 15px 0
+        }
+
+            .sub-role .title {
+                font-weight: 600;
+                color: var(--clr-text);
+                font-size: 1.1rem;
+                margin-bottom: 5px
+            }
+
+            .sub-role .dates {
+                font-size: .95rem;
+                margin-bottom: 10px
+            }
+
+        ul.duties {
+            margin-top: 15px;
+            margin-left: 25px;
+            font-size: 1rem
+        }
+
+            ul.duties li {
+                margin-bottom: 10px;
+                line-height: 1.7
+            }
+
+        /* ——— NAVIGATION DOTS ——— */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            z-index: 100
+        }
+
+            .nav-dots a {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: rgba(45,125,50,.25);
+                transition: .4s ease;
+                border: 3px solid transparent
+            }
+
+                .nav-dots a.active {
+                    background: var(--clr-accent);
+                    transform: scale(1.4);
+                    border-color: rgba(0,200,83,.2)
+                }
+
+                .nav-dots a:hover {
+                    background: var(--clr-primary);
+                    transform: scale(1.3)
+                }
+
+        /* ——— THEME TOGGLE ——— */
+        #themeToggle {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--clr-gradient);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: .4s ease;
+            font-weight: 600
+        }
+
+            #themeToggle:hover {
+                transform: translateY(-4px) rotate(15deg) scale(1.08)
+            }
+
+        /* ——— RESPONSIVE ——— */
+        @media (max-width:1024px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                gap: 30px
+            }
+
+            .hero-name {
+                font-size: 2.8rem
+            }
+
+            .tech-logos {
+                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+                gap: 15px
+            }
+        }
+
+        @media (max-width:768px) {
+            .hero-card {
+                margin: 20px auto 40px;
+                padding: 30px 25px
+            }
+
+            .hero-name {
+                font-size: 2.4rem
+            }
+
+            section {
+                padding: 40px 0
+            }
+
+            .nav-dots {
+                display: none
+            }
+
+            html {
+                font-size: 15px
+            }
+
+            .tech-logos {
+                grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+                gap: 12px
+            }
+
+            .tech-logo {
+                width: 40px;
+                height: 40px
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important
+            }
+
+            .hero-card, .card, .summary-card {
+                background: #fff !important;
+                border: 1px solid #ddd !important
+            }
+
+            #themeToggle, .nav-dots {
+                display: none !important
+            }
+
+            section {
+                padding: 35px 0 !important
+            }
+
+            #experience {
+                margin-top: 60px !important
+            }
+
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+
+            .hero-card::before, .card::before, .summary-card::before {
+                display: none !important
+            }
+
+            html {
+                font-size: 14px !important
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== FIXED ELEMENTS ========== -->
+    <nav class="nav-dots">
+        <a href="#summary" title="Summary"></a>
+        <a href="#competencies" title="Skills"></a>
+        <a href="#experience" title="Experience"></a>
+    </nav>
+    <button id="themeToggle" aria-label="Toggle theme">☾</button>
+
+    <!-- ========== HERO SECTION ========== -->
+    <header class="hero-card" id="summary">
+        <h1 class="hero-name">Lukas Havenga</h1>
+        <p class="tagline">Senior Frontend Engineer</p>
+
+        <div class="pill-row">
+            <span class="pill"><a href="https://maps.google.com/?q=Amsterdam%2C+Netherlands" target="_blank">📍 Amsterdam, Netherlands</a></span>
+            <span class="pill"><a href="mailto:lukashavenga@proton.me">✉️ lukashavenga@proton.me</a></span>
+            <span class="pill"><a href="tel:+31627522126">📱 +31 627 522 126</a></span>
+            <span class="pill"><a href="https://github.com/lukashavenga" target="_blank">🔗 github.com/lukashavenga</a></span>
+            <span class="pill"><a href="https://linkedin.com/in/havenga" target="_blank">💼 linkedin.com/in/havenga</a></span>
+        </div>
+    </header>
+
+    <!-- ========== CORE CONTENT ========== -->
+    <div class="wrapper">
+
+        <!-- Professional Summary -->
+        <div class="summary-card">
+            <p>Senior Frontend Engineer specializing in React and modern JavaScript. Delivers robust, user-focused solutions and elevates team performance through mentorship and a culture of collaboration and camaraderie. Committed to continuous learning, enabling others, and driving technical excellence across Europe, the USA, and South Africa.</p>
+        </div>
+
+        <div class="grid-layout">
+
+            <!-- Left Column: Core Competencies -->
+            <div>
+                <section id="competencies">
+                    <h2>Core Competencies</h2>
+
+                    <div class="card">
+                        <h3 style="font-size:1.1rem;margin-bottom:20px;color:var(--clr-primary)">Frontend Technologies</h3>
+                        <div class="tech-logos">
+                            <a href="https://reactjs.org/" target="_blank" class="tech-logo" title="React">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+                            </a>
+                            <a href="https://www.typescriptlang.org/" target="_blank" class="tech-logo" title="TypeScript">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="tech-logo" title="JavaScript">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML5" target="_blank" class="tech-logo" title="HTML5">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" class="tech-logo" title="CSS3">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+                            </a>
+                            <a href="https://sass-lang.com/" target="_blank" class="tech-logo" title="Sass">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" alt="Sass" />
+                            </a>
+                            <a href="https://redux.js.org/" target="_blank" class="tech-logo" title="Redux">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" />
+                            </a>
+                            <a href="https://styled-components.com/" target="_blank" class="tech-logo" title="Styled Components">
+                                <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" alt="Styled Components" />
+                            </a>
+                            <div class="more-indicator" title="...and many more">⋯</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="font-size:1.1rem;margin-bottom:20px;color:var(--clr-primary)">Development Tools</h3>
+                        <div class="tech-logos">
+                            <a href="https://webpack.js.org/" target="_blank" class="tech-logo" title="Webpack">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" alt="Webpack" />
+                            </a>
+                            <a href="https://vitejs.dev/" target="_blank" class="tech-logo" title="Vite">
+                                <img src="https://vitejs.dev/logo.svg" alt="Vite" />
+                            </a>
+                            <a href="https://jestjs.io/" target="_blank" class="tech-logo" title="Jest">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" />
+                            </a>
+                            <a href="https://eslint.org/" target="_blank" class="tech-logo" title="ESLint">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg" alt="ESLint" />
+                            </a>
+                            <a href="https://git-scm.com/" target="_blank" class="tech-logo" title="Git">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
+                            </a>
+                            <a href="https://www.docker.com/" target="_blank" class="tech-logo" title="Docker">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
+                            </a>
+                            <a href="https://www.jenkins.io/" target="_blank" class="tech-logo" title="Jenkins">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" />
+                            </a>
+                            <a href="https://storybook.js.org/" target="_blank" class="tech-logo" title="Storybook">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg" alt="Storybook" />
+                            </a>
+                            <div class="more-indicator" title="...and many more">⋯</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="font-size:1.1rem;margin-bottom:20px;color:var(--clr-primary)">Cloud & Backend</h3>
+                        <div class="tech-logos">
+                            <a href="https://aws.amazon.com/" target="_blank" class="tech-logo" title="AWS">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" />
+                            </a>
+                            <a href="https://azure.microsoft.com/" target="_blank" class="tech-logo" title="Azure">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure" />
+                            </a>
+                            <a href="https://nodejs.org/" target="_blank" class="tech-logo" title="Node.js">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+                            </a>
+                            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank" class="tech-logo" title="C#">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" />
+                            </a>
+                            <a href="https://www.java.com/" target="_blank" class="tech-logo" title="Java">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+                            </a>
+                            <a href="https://www.python.org/" target="_blank" class="tech-logo" title="Python">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+                            </a>
+                            <a href="https://www.mongodb.com/" target="_blank" class="tech-logo" title="MongoDB">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
+                            </a>
+                            <a href="https://www.mysql.com/" target="_blank" class="tech-logo" title="MySQL">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" />
+                            </a>
+                            <div class="more-indicator" title="...and many more">⋯</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="font-size:1.1rem;margin-bottom:20px;color:var(--clr-primary)">Design & Collaboration</h3>
+                        <div class="tech-logos">
+                            <a href="https://www.figma.com/" target="_blank" class="tech-logo" title="Figma">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" />
+                            </a>
+                            <a href="https://www.sketch.com/" target="_blank" class="tech-logo" title="Sketch">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg" alt="Sketch" />
+                            </a>
+                            <a href="https://www.atlassian.com/software/jira" target="_blank" class="tech-logo" title="Jira">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" />
+                            </a>
+                            <a href="https://www.atlassian.com/software/confluence" target="_blank" class="tech-logo" title="Confluence">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/confluence/confluence-original.svg" alt="Confluence" />
+                            </a>
+                            <a href="https://trello.com/" target="_blank" class="tech-logo" title="Trello">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="Trello" />
+                            </a>
+                            <a href="https://swagger.io/" target="_blank" class="tech-logo" title="Swagger">
+                                <img src="https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg" alt="Swagger" />
+                            </a>
+                            <div class="more-indicator" title="...and many more">⋯</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="font-size:1.1rem;margin-bottom:20px;color:var(--clr-primary)">Learning & Development</h3>
+                        <div class="tech-logos">
+                            <a href="https://nextjs.org/" target="_blank" class="tech-logo" title="Next.js">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" />
+                            </a>
+                            <a href="https://www.cypress.io/" target="_blank" class="tech-logo" title="Cypress">
+                                <img src="https://asset.brandfetch.io/idIq_kF0rb/idv3zwmSiY.jpeg" alt="Cypress" style="border-radius:6px;" />
+                            </a>
+                            <a href="https://vitest.dev/" target="_blank" class="tech-logo" title="Vitest">
+                                <img src="https://vitest.dev/logo.svg" alt="Vitest" />
+                            </a>
+                            <a href="https://vuejs.org/" target="_blank" class="tech-logo" title="Vue.js">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js" />
+                            </a>
+                            <div class="more-indicator" title="...and many more">⋯</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Professional Experience -->
+            <div>
+                <section id="experience">
+                    <h2>Professional Experience</h2>
+
+                    <div class="role">
+                        <div class="company">ACT Commodities Group</div>
+                        <span class="dates">Amsterdam, Netherlands | Jan 2023 – Present</span>
+                        <div class="company-description">
+                            ACT Group is a leading global environmental solutions provider specializing in decarbonization and sustainability consulting. With over 500 experts across seven global offices, ACT helps organizations achieve their environmental goals through innovative carbon trading, renewable energy sourcing, and compliance solutions.
+                        </div>
+                        <div style="font-size:1.05rem;font-weight:600;color:var(--clr-primary);margin-bottom:10px">Senior Software Engineer, Frontend</div>
+                        <ul class="duties">
+                            <li>Designs and implements advanced React-TypeScript solutions that enhance trading-desk workflows</li>
+                            <li>Modern frontend architecture within the internal developers guild, establishing best practices for the development team</li>
+                            <li>Mentors and promotes collaborative engineering culture across development teams</li>
+                        </ul>
+                    </div>
+
+                    <div class="role">
+                        <div class="company">Impact.com</div>
+                        <span class="dates">Cape Town, South Africa | Sep 2016 – Dec 2022 (6 yrs 4 mos)</span>
+                        <div class="company-description">
+                            Impact.com is the world's leading partnership management platform, transforming how businesses grow through affiliate marketing, influencer partnerships, and customer advocacy programs. Serving over 4,500 global brands including Walmart, Uber, Shopify, and L'Oréal.
+                        </div>
+
+                        <div class="sub-role">
+                            <div class="title">Associate Manager – Engineering / Senior Frontend Engineer</div>
+                            <span class="dates">Feb 2022 – Dec 2022</span>
+                            <ul class="duties">
+                                <li>Data Visualization squad, delivering React-based reporting initiatives that served thousands of global brands</li>
+                                <li>Managed performance reviews, conducted 1-on-1s, and led hiring processes</li>
+                                <li>Integrated Java and Node.js microservices to create seamless partnership analytics and reporting dashboards</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-role">
+                            <div class="title">Senior Software Engineer</div>
+                            <span class="dates">Feb 2020 – Feb 2022</span>
+                            <ul class="duties">
+                                <li>Key contributor to the greenfield Impact Data Lab, creating an award-winning sandbox reporting platform using React</li>
+                                <li>Architected the migration from legacy ExtJS systems to modern React-based architecture</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-role">
+                            <div class="title">JavaScript Engineer</div>
+                            <span class="dates">Sep 2016 – Feb 2020</span>
+                            <ul class="duties">
+                                <li>Built sophisticated analytics interfaces for marketing data visualization, serving millions of partnership interactions</li>
+                                <li>Introduced modern frontend tooling and development practices, significantly improving developer productivity</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="role">
+                        <div class="company">Full Facing (formerly Zapop)</div>
+                        <span class="dates">Cape Town, South Africa | Jan 2014 – Sep 2016 (2 yrs 9 mos)</span>
+                        <div class="company-description">
+                            ZaPOP/Full Facing specializes in innovative in-store marketing solutions, helping brands connect with consumers at the point of purchase. With over 10 years of experience in retail marketing, the company develops cutting-edge installations and media solutions.
+                        </div>
+
+                        <div class="sub-role">
+                            <div class="title">Software Developer — Full Stack</div>
+                            <span class="dates">Sep 2014 – Sep 2016</span>
+                            <ul class="duties">
+                                <li>Developed comprehensive PHP and JavaScript solutions for event access control, ticketing systems, and employee training platforms</li>
+                                <li>Co-managed the innovative ticket-sales project, emphasizing responsive and cutting-edge architecture for high-traffic events</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-role">
+                            <div class="title">PHP Developer Intern</div>
+                            <span class="dates">Jan 2014 – Sep 2014</span>
+                            <ul class="duties">
+                                <li>Created dynamic marketing websites and promotional platforms for in-store campaigns</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="role">
+                        <div class="company">Warp Development</div>
+                        <span class="dates">Stellenbosch, South Africa | Nov 2012 – Jan 2014</span>
+                        <div class="company-description">
+                            Warp Development is a leading South African software development company recognized as one of the top B2B partners by Clutch in 2022. With over 100 employees, the company specializes in enterprise-level e-commerce and order management solutions.
+                        </div>
+                        <div style="font-size:1.05rem;font-weight:600;color:var(--clr-primary);margin-bottom:10px">C# Junior Software Developer</div>
+                        <ul class="duties">
+                            <li>Developed comprehensive ticketing systems using C#, MVC, and ASP.NET frameworks for entertainment and corporate events</li>
+                            <li>Managed MySQL database implementations and provided ongoing client support for enterprise solutions</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </div><!-- /wrapper -->
+    <!-- ========== ENHANCED JAVASCRIPT ========== -->
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        toggle.onclick = () => {
+            const current = document.documentElement.dataset.theme;
+            document.documentElement.dataset.theme = current === 'light' ? 'dark' : 'light';
+            toggle.style.transform = 'scale(0.8) rotate(180deg)';
+            setTimeout(() => toggle.style.transform = '', 250);
+        };
+
+        const dots = [...document.querySelectorAll('.nav-dots a')];
+        const sections = [...document.querySelectorAll('section,header.hero-card')];
+
+        const spy = () => {
+            const pos = window.scrollY + window.innerHeight / 3;
+            sections.forEach((sec, i) => {
+                const top = sec.offsetTop, bot = top + sec.offsetHeight;
+                const isActive = pos >= top && pos < bot;
+                dots[i]?.classList.toggle('active', isActive);
+            });
+        };
+
+        spy();
+        window.addEventListener('scroll', spy);
+
+        document.querySelectorAll('.card').forEach((card, i) => {
+            card.style.animationDelay = `${i * 0.1}s`;
+            card.style.animation = 'fadeUp 0.6s ease forwards';
+        });
+    </script>
+</body>
+</html>
