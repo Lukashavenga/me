@@ -21,23 +21,7 @@ This site highlights my professional journey, technical skills, and personal int
 - **Personal Interests**  
   Find out about my favorite activities—gaming, D&D, weightlifting, listening to rock music, and my love for all things Lord of the Rings.
 
-## Getting Started
-
-1. **Visit the Website:**  
-   [https://lukashavenga.github.io/me/](https://lukashavenga.github.io/me/)
-
-2. **Explore Sections:**  
-   Use the navigation links or menu to Discover Experience, Projects, Skills, and more.
-
-3. **Reach Out:**  
+## Reach Out
    Head to the contact section to connect or give feedback.
-
-## Contributing
-
-This portfolio site is for personal career presentation. If you spot any mistakes or broken links, kindly let me know through the website’s contact section.
-
-## License
-
-All content is intended for personal presentation only. Sample code may be referenced or used with appropriate credit.
 
 Thanks for stopping by!
